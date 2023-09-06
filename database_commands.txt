@@ -1,2 +1,7 @@
 CREATE DATABASE bookmyshow;
 USE bookmyshow;
+
+CREATE TABLE Customer ( userID varchar(255),password varchar(20), firstName varchar(80), lastName varchar(80), email varchar(20));
+INSERT INTO Customer(userID,password,firstName,lastName,email) VALUES ('cust1','pass1','arav','kumar','arav@example.com');
+INSERT INTO Customer(userID,password,firstName,lastName,email) VALUES ('cust2','pass2','aditya','gupta','aditya@example.com');
+INSERT INTO Customer(userID,password,firstName,lastName,email) VALUES ('cust3','pass3','ayesha','negi','ayesha@example.com');
