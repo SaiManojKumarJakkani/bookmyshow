@@ -20,5 +20,17 @@ public class JASONParsing {
         }
         return user;
     }
+    public static Venue parseDataVenue(String filePath){
+        Venue venue=null;
+        try{
+            ObjectMapper om=new ObjectMapper();
+            File jsonfile=new File(filePath);
+            venue=om.readValue(jsonfile,Venue.class);
+        }
+        catch(Exception e){
+            System.out.println(e);
+        }
+        return venue;
+    }
     
 }
