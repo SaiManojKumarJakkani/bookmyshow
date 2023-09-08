@@ -79,23 +79,16 @@ public class Venue {
         this.name = name;
     }
  
-    public Venue addDetails(String ownerId,String path)throws IOException, ClassNotFoundException, SQLException{
-        Venue obj=null;
+    public int addDetails(String ownerId)throws IOException, ClassNotFoundException, SQLException{
+        int success=0;
         try{
-            obj=JASONParsing.parseDataVenue(path);
-            obj.setOwnerId(ownerId);
+            this.setOwnerId(ownerId);
             VenueDAO doa=new VenueDAO();
-            int success=doa.pushDetailsVenue(obj);
-            if(success>0)
-            return obj;
-            else {
-                obj=null;
-                return obj;
-            }   
+            success=doa.pushDetailsVenue(this);     
         }
         catch(Exception e){
             System.out.println(e);
         }
-        return obj;
+        return success;
     }
 }
