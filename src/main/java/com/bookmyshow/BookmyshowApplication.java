@@ -1,33 +1,34 @@
 package src.main.java.com.bookmyshow;
-
-import java.io.FileReader;
-import java.util.List;
-
-import src.main.java.com.bookmyshow.jdbc.*;
-import src.main.java.com.bookmyshow.model.*;
-import src.main.java.com.bookmyshow.service.JASONParsing;
-
-// import src.com.bookmyshow.model.*;
-
-public class BookmyshowApplication{
-    public static void main(String[] args){
-        String filePath = "/Users/cb-it-01-1958/Documents/Bookmyshow/src/inputs/owner_login.jason";
-        User user1= (Owner)JASONParsing.parseDataOwner(filePath);
-        System.out.println("::::::::::::");
-        System.out.println("User: " + user1.getUserID());
-        System.out.println("Password: " + user1.getPassword());
-        System.out.println("::::::::::::");
-        System.out.println();
-
-        OwnerDAO ownerDAO = new OwnerDAO();
-        List<User> users=ownerDAO.getAllOwners();
-        for (User u:users){
-            System.out.println(u);
-            System.out.println();
+import java.io.*;
+public class BookmyshowApplication {
+    public static void main(String[] args) throws NumberFormatException, IOException{
+        BufferedReader br=new BufferedReader(new InputStreamReader(System.in));
+        System.out.println("....................WELCOME TO BOOK MY SHOW.......................");
+        boolean valid=false;
+        int choice;
+        System.out.println("Enter 1 to sign as owner");
+        System.out.println("Enter 2 to sign as customer");
+        while(valid==false){
+            choice =Integer.parseInt(br.readLine());
+            switch(choice){
+                case 1:{
+                    valid=true;
+                    System.out.println("Welcome owner");
+                    BookmyshowOwner obj=new BookmyshowOwner();
+                    obj.ownerStart();
+                    break;
+                    }
+                case 2:{
+                    valid=true;
+                    System.out.println("Welcome customer");
+                    BookmyshowCustomer obj=new BookmyshowCustomer();
+                    obj.customerStart();
+                    break;
+                }
+               default:{
+                    System.out.println("Invalid choice, try again");
+               }
+            }
         }
-
-        User user=ownerDAO.getOwner("user123");
-        System.out.println(user);
-    }
-
+    }   
 }
