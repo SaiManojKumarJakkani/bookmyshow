@@ -1,2 +1,7 @@
 CREATE DATABASE bookmyshow;
 USE bookmyshow;
+
+CREATE TABLE Booking (bookingID INT NOT NULL, bookingDate VARCHAR(255) NOT NULL, numSeatsBooked INT, bankDetailsCust VARCHAR(255), pricingTierChosen VARCHAR(20), transactionStatus VARCHAR(20) NOT NULL, PRIMARY KEY (bookingID), userID VARCHAR(255) FOREIGN KEY REFERENCES Customer(userID), venueid VARCHAR(255) FOREIGN KEY REFERENCES venue(venueid), showid VARCHAR(255) FOREIGN KEY REFERENCES showdetails(showid));
+
+
+
