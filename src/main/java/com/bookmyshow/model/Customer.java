@@ -7,6 +7,7 @@ import src.main.java.com.bookmyshow.service.JASONParsing;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -63,7 +64,7 @@ public class Customer extends User{
         }
     }
 
-    public void makeBookingForShow(String jsonFilePath){
+    public void makeBookingForShow(String jsonFilePath) throws SQLException {
 
         List<Booking> bookings= JASONParsing.parseBookingData(jsonFilePath);
         Booking bookingRequestedByCust = bookings.get(0);
@@ -88,7 +89,7 @@ public class Customer extends User{
                             bookingRequestedByCust.getBankDetailsCust(),
                             bookingRequestedByCust.getPricingTierChosen(),
                             "success");
-            bookingDAO.insert(booking);
+            BookingDAO.insertNewBooking(booking);
         }else {
             System.out.println("Insufficient seats available for the chosen pricing tier. Booking failed.");
         }
