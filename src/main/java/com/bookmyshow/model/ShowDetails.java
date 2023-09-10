@@ -9,10 +9,10 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 
 public class ShowDetails {
-    private String showID;
-    private String hallID;
+    private int showID;
+    private int hallID;
     private String movieName;
-    private String venueID;
+    private int venueID;
     private LocalDate date;
     private LocalTime startTime;
     private LocalTime endTime;
@@ -30,8 +30,8 @@ public class ShowDetails {
         movieDAO = new MovieDAO();
     }
 
-    public ShowDetails( String showID, String hallID, String movieName,
-                String venueID, LocalDate date, LocalTime startTime, LocalTime endTime, double silverPrice,
+    public ShowDetails( int showID, int hallID, String movieName,
+                int venueID, LocalDate date, LocalTime startTime, LocalTime endTime, double silverPrice,
                 double goldPrice, double platinumPrice) {
         showDetailsDAO = new ShowDetailsDAO();
         movieDAO = new MovieDAO();
@@ -69,16 +69,16 @@ public class ShowDetails {
     public int getAvailableSeatsForPlatinum(){
         return showDetailsDAO.getAvailableSeatsForPlatinum(this.showID);
     }
-    public String getShowID() {
+    public int getShowID() {
         return showID;
     }
     public String getMovieName() {
         return movieName;
     }
-    public String getVenueID() {
+    public int getVenueID() {
         return venueID;
     }
-    public String getHallID() {
+    public int getHallID() {
         return hallID;
     }
     public String getPricingTiers() {
