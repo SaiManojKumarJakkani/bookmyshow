@@ -22,22 +22,21 @@ public class Customer extends User{
     public Customer(){
         customerDAO = new CustomerDAO();
         showDetailsDAO = new ShowDetailsDAO();
+        bookingDAO = new BookingDAO();
         listOfBookings = new ArrayList<>();
     }
     public Customer(String userID,String password,String firstName, String lastName,String emailID){
         super(userID,password, firstName, lastName,emailID);
         customerDAO = new CustomerDAO();
         showDetailsDAO = new ShowDetailsDAO();
+        bookingDAO = new BookingDAO();
         listOfBookings = new ArrayList<>();
     }
 
     @Override
-    public User login(String filePath){
-//        String filePath = "/Users/cb-it-01-1959/Documents/Assign-3/bookmyshow-addrija/src/inputs/customer_login.json";
-        Customer userTemp = (Customer) parseDataCustomer(filePath);
-
-        Customer queryCustomer = (Customer) customerDAO.getCustomerByEmailID(userTemp.getEmailID());
-        if(queryCustomer!=null && queryCustomer.getPassword().equals(userTemp.getPassword())){
+    public User login(User customer){
+        Customer queryCustomer = (Customer) customerDAO.getCustomerByUserID(customer.getUserID());
+        if(queryCustomer!=null && queryCustomer.getPassword().equals(customer.getPassword())){
             System.out.println("Login successful.");
             return queryCustomer;
         }else {
@@ -47,27 +46,21 @@ public class Customer extends User{
     }
 
     @Override
-    public User signUp(String filePath) {
-        //read details of new customer
-        Customer newCustomer = (Customer) parseDataCustomer(filePath);
-        //create data access object to check database
-        User queryEmailCustomer = customerDAO.getCustomerByEmailID(newCustomer.getEmailID());
-        if(queryEmailCustomer==null){
-            int numCustomers = customerDAO.getRowsInCustomerTable();
-            newCustomer.setUserID("cust"+Integer.toString(numCustomers+1));
-            customerDAO.addNewCustomer(newCustomer);
+    public User signUp(User newCustomer) {
+        User queryCustomer = customerDAO.getCustomerByUserID(newCustomer.getUserID());
+        if(queryCustomer==null){
+            customerDAO.addNewCustomer((Customer) newCustomer);
             System.out.println("Sign up successful. Welcome!");
             return newCustomer;
         }else{
-            System.out.println("This email is already in use.");
+            System.out.println("This userID is already in use. SignUp failed.");
             return null;
         }
     }
 
     public void makeBookingForShow(String jsonFilePath) throws SQLException {
 
-        List<Booking> bookings= JASONParsing.parseBookingData(jsonFilePath);
-        Booking bookingRequestedByCust = bookings.get(0);
+        Booking bookingRequestedByCust= JASONParsing.parseBookingData(jsonFilePath);
         String tier = bookingRequestedByCust.getPricingTierChosen();
         int seatsAvailable = 0;
         if(tier.equalsIgnoreCase("silver")){
@@ -77,12 +70,12 @@ public class Customer extends User{
         } else if (tier.equalsIgnoreCase("platinum")) {
             seatsAvailable = showDetailsDAO.getAvailableSeatsForPlatinum(bookingRequestedByCust.getShowID());
         }
-
         if(seatsAvailable-bookingRequestedByCust.getNumSeatsBooked()>=0){
             Booking booking =
                     new Booking(bookingRequestedByCust.getBookingID(),
                             this.getUserID(),
                             bookingRequestedByCust.getVenueID(),
+                            bookingRequestedByCust.getHallID(),
                             bookingRequestedByCust.getShowID(),
                             bookingRequestedByCust.getBookingDate(),
                             bookingRequestedByCust.getNumSeatsBooked(),
@@ -90,6 +83,8 @@ public class Customer extends User{
                             bookingRequestedByCust.getPricingTierChosen(),
                             "success");
             BookingDAO.insertNewBooking(booking);
+            showDetailsDAO.incrementBookedSeats(bookingRequestedByCust.getShowID(),
+                    bookingRequestedByCust.getNumSeatsBooked(),bookingRequestedByCust.getPricingTierChosen());
         }else {
             System.out.println("Insufficient seats available for the chosen pricing tier. Booking failed.");
         }
@@ -109,10 +104,14 @@ public class Customer extends User{
     }
 
     public void viewBookingHistory(){
-        List<Booking> bookings = bookingDAO.getBookingHistoryOfCustomer(this.getUserID());
-        for(Booking bk:bookings){
-            System.out.println(bk);
-            System.out.println("----------------------------");
+        try {
+            listOfBookings = bookingDAO.getBookingHistoryOfCustomer(this.getUserID());
+            for(Booking bk:listOfBookings){
+                System.out.println(bk);
+                System.out.println("----------------------------");
+            }
+        }catch (Exception e){
+            e.printStackTrace();
         }
     }
 }
