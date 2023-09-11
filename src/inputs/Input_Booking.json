@@ -6,6 +6,6 @@
   "numSeatsBooked":  2,
   "bankDetailsCust": "1111",
   "pricingTierChosen": "gold",
-  "transactionStatus": ""
+  "transactionStatus": "success"
 
 }
