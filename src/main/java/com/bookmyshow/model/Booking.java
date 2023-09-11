@@ -3,7 +3,7 @@ import java.util.Date;
 
 public class Booking {
     private  int bookingID;//Primary key
-    private  int custID;//foreign key
+    private  String custID;//foreign key
 
     private  int venueID;//foreign key
     private  int showID;//foreign key
@@ -15,7 +15,7 @@ public class Booking {
 
     public Booking() {
         this.bookingID=0;
-        this.custID=0;
+        this.custID="";
         this.venueID=0;//take from venue class
         this.showID=0;//take from show class
         this.bookingDate= null;
@@ -24,7 +24,7 @@ public class Booking {
         this.pricingTierChosen="";// choose from [gold, silver, platinum]
         this.transactionStatus="";//Failed or successful
     }
-    public Booking(int bookingID, int custID,  int venueID, int showID,
+    public Booking(int bookingID, String custID,  int venueID, int showID,
                    Date bookingDate, int numSeatsBooked, String bankDetailsCust,
                    String pricingTierChosen, String transactionStatus) {
         this.bookingID=bookingID;
@@ -47,10 +47,10 @@ public class Booking {
     }
 
     //Getter and setter functions
-    public int getCustID() {
+    public String getCustID() {
         return custID;
     }
-    public void setCustID(int custID) {
+    public void setCustID(String custID) {
         this.custID = custID;
     }
 
