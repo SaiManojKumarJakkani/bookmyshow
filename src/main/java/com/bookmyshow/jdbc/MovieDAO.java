@@ -16,7 +16,7 @@ public class MovieDAO {
         }
 
         //If the owners wants to add new movie
-        public static void insertNewMovie( Movies movie) throws  SQLException{
+        public static void insertNewMovie( Movie movie) throws  SQLException{
 
             String sqlQuery = "INSERT INTO " + tableName + " VALUES (?,?,?,?,?,?,?,?)";
             try {

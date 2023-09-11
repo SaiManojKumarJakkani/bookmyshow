@@ -18,16 +18,22 @@ public class BookingDAO {
         JDBCMain.getDataJDBC(sqlQuery, tableName);
     }
 
+
      public static  void insertBooking(Booking booking) throws  SQLException {
 
         Connection connection= null;
         PreparedStatement preparedStatement = null;
         try {
             connection= DatabaseConnectionManager.getConnection();
+            //Create table if it does not exist
+            String createSQLQuery  = "CREATE TABLE IF NOT EXISTS Booking (bookingID INT AUTO_INCREMENT PRIMARY KEY,  custID INT,  venueID INT,  showID INT, bookingDate VARCHAR(255),  numSeatsBooked INT,  bankDetailsCust VARCHAR(255),  pricingTierChosen VARCHAR(255), transactionStatus VARCHAR(255))";
+
             String sqlQuery = "INSERT INTO " + tableName + " VALUES (?,?,?,?,?,?,?,?,?)";
+            PreparedStatement pstmt1 = connection.prepareStatement(createSQLQuery);
+            pstmt1.execute();
             PreparedStatement pstmt = connection.prepareStatement(sqlQuery);
             pstmt.setInt(1,booking.getBookingID());
-            pstmt.setInt(2,booking.getCustID());
+            pstmt.setString(2,booking.getCustID());
             pstmt.setInt(3,booking.getVenueID());
             pstmt.setInt(4,booking.getShowID());
             pstmt.setDate(5, new java.sql.Date(booking.getBookingDate().getTime()));
