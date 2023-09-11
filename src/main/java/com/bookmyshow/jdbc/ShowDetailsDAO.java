@@ -182,4 +182,15 @@ public class ShowDetailsDAO {
         return rows;
     }
 
+    public void removeShow(int showID){
+        String sqlQuery = "DELETE FROM Shows WHERE showID=?";
+        try {
+            PreparedStatement pstmt = connection.prepareStatement(sqlQuery);
+            pstmt.setInt(1,showID);
+            int rowsAffected = pstmt.executeUpdate();
+            System.out.println("Rows affected: "+ rowsAffected);
+        }catch (Exception e){
+            e.getMessage();
+        }
+    }
 }
