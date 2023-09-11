@@ -77,8 +77,9 @@ public class CustomerDAO {
         return user;
     }
 
-    public void addNewCustomer(Customer customer){
+    public int addNewCustomer(Customer customer){
         String sqlQuery = "INSERT INTO " + tableName +" VALUES (?,?,?,?,?)";
+        int rowsAffected = 0;
         try {
             PreparedStatement pstmt = connection.prepareStatement(sqlQuery);
             pstmt.setString(1, customer.getUserID());
@@ -86,10 +87,12 @@ public class CustomerDAO {
             pstmt.setString(3, customer.getFirstName());
             pstmt.setString(4, customer.getLastName());
             pstmt.setString(5, customer.getEmailID());
-            pstmt.executeUpdate();
+            rowsAffected = pstmt.executeUpdate();
         }catch (Exception e){
+            rowsAffected=-1;
             System.out.println(e);
         }
+        return rowsAffected;
     }
 
     public int getRowsInCustomerTable() {
