@@ -5,14 +5,10 @@ import src.main.java.com.bookmyshow.jdbc.CustomerDAO;
 import src.main.java.com.bookmyshow.jdbc.ShowDetailsDAO;
 import src.main.java.com.bookmyshow.service.JASONParsing;
 
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
-
-import static src.main.java.com.bookmyshow.service.JASONParsing.*;
 
 public class Customer extends User{
     private List<Booking> listOfBookings;
@@ -32,7 +28,9 @@ public class Customer extends User{
         bookingDAO = new BookingDAO();
         listOfBookings = new ArrayList<>();
     }
-
+    public Customer(User otherCustomer){
+        this(otherCustomer.getUserID(), otherCustomer.getPassword(), otherCustomer.getFirstName(), otherCustomer.getLastName(), otherCustomer.getEmailID());
+    }
     @Override
     public User login(User customer){
         Customer queryCustomer = (Customer) customerDAO.getCustomerByUserID(customer.getUserID());
@@ -46,16 +44,17 @@ public class Customer extends User{
     }
 
     @Override
-    public User signUp(User newCustomer) {
+    public int signUp(User newCustomer) {
         User queryCustomer = customerDAO.getCustomerByUserID(newCustomer.getUserID());
+        int rowsAffected=0;
         if(queryCustomer==null){
-            customerDAO.addNewCustomer((Customer) newCustomer);
+            rowsAffected = customerDAO.addNewCustomer((Customer) newCustomer);
             System.out.println("Sign up successful. Welcome!");
-            return newCustomer;
         }else{
+            rowsAffected=-1;
             System.out.println("This userID is already in use. SignUp failed.");
-            return null;
         }
+        return rowsAffected;
     }
 
     public void makeBookingForShow(String jsonFilePath) throws SQLException {
