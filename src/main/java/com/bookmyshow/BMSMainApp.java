@@ -6,7 +6,7 @@ import java.io.FileReader;
 import java.util.List;
 import java.util.Scanner;
 import java.util.Date;
-import org.example.Movies;
+import org.example.Movie;
 //import src.main.java.com.bookmyshow.jdbc.*;
 //import src.main.java.com.bookmyshow.model.*;
 import org.example.Parse_JSON;
@@ -31,9 +31,9 @@ public class BMSMainApp {
     public static void addMovieDetails() throws SQLException {
 
         String filePath = "src/main/java/org/example/Input_Movie.json";
-        Movies newmovie = Parse_JSON.parseMoviesData(filePath);
+        Movie newmovie = Parse_JSON.parseMoviesData(filePath);
         MovieDAO movieDAO = new MovieDAO();
-        Movies movie = new Movies();
+        Movie movie = new Movie();
         movie.setMovieName(newmovie.getMovieName());
         movie.setGenre(newmovie.getGenre());
         movie.setActor(newmovie.getActor());
