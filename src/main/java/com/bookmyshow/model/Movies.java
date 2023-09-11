@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Movies {
-    private String movieID;
+
     private String movieName;
     private String genre;
     private String actor;
@@ -15,7 +15,7 @@ public class Movies {
     private String rating;
 
     public Movies() {
-        this.movieID= "";
+
         this.movieName="";
         this.genre="";
         this.actor="";
@@ -27,8 +27,7 @@ public class Movies {
 
     }
 
-    public Movies(String movieID, String movieName, String genre, String actor, String actress, String producer, String director, String language, String rating) {
-    this.movieID=movieID;
+    public Movies( String movieName, String genre, String actor, String actress, String producer, String director, String language, String rating) {
     this.movieName=movieName;
     this.genre=genre;
     this.actor=actor;
@@ -40,13 +39,6 @@ public class Movies {
     }
 
     //Getter Setter for movieID
-    public String getMovieID() {
-        return movieID;
-    }
-
-    public void setMovieID(String movieID) {
-        this.movieID = movieID;
-    }
 
     //Getter Setter for movie Name
     public String getMovieName() {
@@ -107,8 +99,7 @@ public class Movies {
     }
     @Override
     public String toString() {
-        return "MovieID: "+movieID+
-                "\n movieName: "+movieName+
+        return "\n movieName: "+movieName+
                 "\n genre: "+genre+
                 "\n actor: " +actor+
                 "\n actress: " +actress+
