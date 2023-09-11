@@ -1,31 +1,31 @@
 package org.example;
-import java.util.ArrayList;
-import java.util.List;
-public class Booking {
-    private  String bookingID;//Primary key
-    private  String custID;//foreign key
+import java.util.Date;
 
-    private  String venueID;//foreign key
-    private  String showID;//foreign key
-    private  String bookingDate; //read from user
+public class Booking {
+    private  int bookingID;//Primary key
+    private  int custID;//foreign key
+
+    private  int venueID;//foreign key
+    private  int showID;//foreign key
+    private Date bookingDate; //read from user
     private  int numSeatsBooked;//read from user
     private  String pricingTierChosen; //read from user
     private  String bankDetailsCust;//bank account number and IFSC code-2d array for each customer
     private  String transactionStatus;//hardcode in json
 
     public Booking() {
-        this.bookingID="";
-        this.custID="";
-        this.venueID="";//take from venue class
-        this.showID="";//take from show class
-        this.bookingDate="";
+        this.bookingID=0;
+        this.custID=0;
+        this.venueID=0;//take from venue class
+        this.showID=0;//take from show class
+        this.bookingDate= null;
         this.numSeatsBooked=0;//read from user
         this.bankDetailsCust=""; // when to take arraylist vs string list
         this.pricingTierChosen="";// choose from [gold, silver, platinum]
         this.transactionStatus="";//Failed or successful
     }
-    public Booking(String bookingID, String custID,  String venueID, String showID,
-                   String bookingDate, int numSeatsBooked, String bankDetailsCust,
+    public Booking(int bookingID, int custID,  int venueID, int showID,
+                   Date bookingDate, int numSeatsBooked, String bankDetailsCust,
                    String pricingTierChosen, String transactionStatus) {
         this.bookingID=bookingID;
         this.custID= custID;
@@ -39,42 +39,42 @@ public class Booking {
     }
 
     //Getter and setter functions
-    public String getBookingID() {
+    public int getBookingID() {
         return bookingID;
     }
-    public void setBookingID(String bookingID) {
+    public void setBookingID(int bookingID) {
         this.bookingID = bookingID;
     }
 
     //Getter and setter functions
-    public String getCustID() {
+    public int getCustID() {
         return custID;
     }
-    public void setCustID(String custID) {
+    public void setCustID(int custID) {
         this.custID = custID;
     }
 
     //Getter and setter functions
-    public String getVenueID() {
+    public int getVenueID() {
         return venueID;
     }
-    public void setVenueID(String venueID) {
+    public void setVenueID(int venueID) {
         this.venueID = venueID;
     }
 
     //Getter and setter functions
-    public String getShowID() {
+    public int getShowID() {
         return showID;
     }
-    public void setShowID(String showID) {
+    public void setShowID(int showID) {
         this.showID = showID;
     }
 
     //Getter and setter functions
-    public String getBookingDate() {
+    public Date getBookingDate() {
         return bookingDate;
     }
-    public void setBookingDate(String bookingDate) {
+    public void setBookingDate(Date bookingDate) {
         this.bookingDate = bookingDate;
     }
 
