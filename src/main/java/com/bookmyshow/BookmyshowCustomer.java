@@ -31,7 +31,7 @@ public class BookmyshowCustomer {
                 System.out.println("Enter path of json file for new user sign up details:");
                 String filePath = sc.nextLine();
                 customer = JASONParsing.parseDataCustomer(filePath);
-                customer = (Customer) customer.signUp(customer);
+                customer.signUp(customer);
                 break;
             case 2 :
                 System.out.println("Enter path of json file for login details:");
