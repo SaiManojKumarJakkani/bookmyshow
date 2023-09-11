@@ -10,6 +10,48 @@ public class VenueDAO {
     public VenueDAO(){
         con=DatabaseConnectionManager.getConnection();
     }
+    public List<Venue> getAllVenuesForOwner(String ownerID){
+        String sqlQuery = "SELECT * FROM Venue where ownerID = '"+ownerID+"'";
+        List<Venue> venues=new ArrayList<Venue>();
+        try{
+            Statement st = con.createStatement();
+            ResultSet rs = st.executeQuery(sqlQuery);
+            int columnCount = rs.getMetaData().getColumnCount();
+
+            while (rs.next()) {
+                Venue v=new Venue();
+                v.setOwnerId(rs.getString("venueID"));
+                v.setVenueId(Integer.parseInt(rs.getString("venueID")));
+                v.setName(rs.getString("name"));
+                String typeString = rs.getString("type");
+                Type type;
+                switch (typeString) {
+                    case "TYPE1":
+                        type = Type.multiplex;
+                        break;
+                    case "TYPE2":
+                        type = Type.theatre;
+                        break;
+                    case "TYPE3":
+                        type = Type.facility;
+                        break;
+                    default:
+                        type = Type.theatre;
+                        break;
+                }
+                v.setType(type);
+                v.setAddress(rs.getString("address"));
+                v.setNumhall(Integer.parseInt(rs.getString("numhall")));
+                venues.add(v);
+            }
+        }
+        catch(Exception e){
+            System.out.println(e);
+            
+        }
+        return venues;
+    }
+
     public int pushDetailsVenue(Venue obj) throws ClassNotFoundException, IOException, SQLException{
         try{
             con=DatabaseConnectionManager.getConnection();
