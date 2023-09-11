@@ -10,54 +10,14 @@ import src.main.java.com.bookmyshow.service.JASONParsing;
 
 
 public class BookmyshowCustomer {
-    private static void printShowsArray(List<ShowDetails> arr){
+    private void printShowsArray(List<ShowDetails> arr){
         for(ShowDetails show:arr){
             System.out.println(show);
             System.out.println();
         }
     }
-    public static void main(String[] args){
-//        // test for login
-//        String filePath1 = "/Users/cb-it-01-1959/Documents/Assign-3/bookmyshow-addrija/src/inputs/customer_login.json";
-//        Customer customer1 = JASONParsing.parseDataCustomer(filePath1);
-//        customer1 = (Customer)customer1.login(customer1);
-//        System.out.println("::::::::::::");
-//        System.out.println(customer1);
-//        System.out.println("::::::::::::");
-//
-//        //test for signup
-//        String filePath2 = "/Users/cb-it-01-1959/Documents/Assign-3/bookmyshow-addrija/src/inputs/customer_signup.json";
-//        Customer customer2 = JASONParsing.parseDataCustomer(filePath2);
-//        customer2 = (Customer)customer2.signUp(customer2);
-//        System.out.println("::::::::::::");
-//        System.out.println(customer2);
-//        System.out.println("::::::::::::");
+    public void customerStart(String[] args){
 
-//        //test for view shows on a particular date and venue
-//        List<ShowDetails> shows1 = Customer.getShowsOnDate(LocalDate.parse("2023-09-10"),"venue1");
-//        System.out.println(shows1.size());
-//
-//        //test for view shows in a date range at venue
-//        List<ShowDetails> shows2 = Customer.getShowsInDateRange(LocalDate.parse("2023-09-01"),LocalDate.parse("2023-09-20"),"venue1");
-//        System.out.println(shows2.size());
-//
-//        //test for shows of a movie in date range across all venues
-//        List<ShowDetails> shows3 = Customer.getShowsForMovieInDateRange(LocalDate.parse("2023-09-01"),LocalDate.parse("2023-09-20"),"barbie");
-//        System.out.println(shows3.size());
-//
-//        //test for shows of a movie on a date across all venues
-//        List<ShowDetails> shows4 = Customer.getShowsForMovieOnDate(LocalDate.parse("2023-09-10"),"barbie");
-//        System.out.println(shows4.size());
-//
-//        test for adding booking
-//        String bookingJsonFile = "/Users/cb-it-01-1959/Documents/Assign-3/bookmyshow-addrija/src/inputs/bookingJson.json";
-//        try {
-//            customer1.makeBookingForShow(bookingJsonFile);
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
-//        test for viewing booking history
-//        customer1.viewBookingHistory();
         Scanner sc = new Scanner(System.in);
         System.out.println("Using as customer...");
         System.out.println("Please enter appropriate option");
