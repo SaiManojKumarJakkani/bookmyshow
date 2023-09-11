@@ -48,12 +48,19 @@ public class VenueDAO {
         int success=1;
         try{
         con=DatabaseConnectionManager.getConnection();
-        PreparedStatement pstmt = con.prepareStatement("INSERT INTO hall (venueid,numseatsgold,numseatssilver,numseatsplatinum) VALUES (?,?,?,?)",PreparedStatement.RETURN_GENERATED_KEYS);
+        int hallCount=1;
+        for(Hall hall : obj.getListhall()){
+            hall.setHallName("AUDI-"+hallCount);
+            hallCount++;
+
+        }
+        PreparedStatement pstmt = con.prepareStatement("INSERT INTO hall (venueid,hallname,numseatsgold,numseatssilver,numseatsplatinum) VALUES (?,?,?,?,?)",PreparedStatement.RETURN_GENERATED_KEYS);
         for(Hall hall : obj.getListhall()){ 
             pstmt.setInt(1, obj.getVenueId());
-            pstmt.setInt(2, hall.getNumSeatsGold());
-            pstmt.setInt(3, hall.getNumSeatsSilver());
-            pstmt.setInt(4, hall.getNumSeatsPlatinum());
+            pstmt.setString(2, hall.getHallName());
+            pstmt.setInt(3, hall.getNumSeatsGold());
+            pstmt.setInt(4, hall.getNumSeatsSilver());
+            pstmt.setInt(5, hall.getNumSeatsPlatinum());
             pstmt.addBatch();   
          }
         int[] affectedRecords = pstmt.executeBatch();
