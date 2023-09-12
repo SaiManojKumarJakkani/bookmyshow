@@ -1,5 +1,0 @@
-CREATE DATABASE bookmyshow;
-USE bookmyshow;    
-CREATE TABLE venue(ownerid VARCHAR(50),venueid INT AUTO_INCREMENT PRIMARY KEY,name VARCHAR(50) UNIQUE,type VARCHAR(20),address VARCHAR(100),numhall INT(50));  
-CREATE TABLE hall(hallid INT AUTO_INCREMENT PRIMARY KEY,venueid INT,numseatsgold INT,numseatssilver INT,numseatsplatinum INT,FOREIGN KEY(venueid) REFERENCES venue(venueid)  ON DELETE CASCADE  
-  ON UPDATE CASCADE);
