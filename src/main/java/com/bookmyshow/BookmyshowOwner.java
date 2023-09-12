@@ -138,8 +138,9 @@ public class BookmyshowOwner{
                 LocalDate date =null;
                 try {
                     date = LocalDate.parse(dateString, formatter);
+                    currentUser.getListOfShowsDate(date);
+
                 } catch (Exception e) {e.printStackTrace();}
-                currentUser.getListOfShowsDate(date);
 
             }
 
