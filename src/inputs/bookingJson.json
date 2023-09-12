@@ -1,9 +1,0 @@
-{
-  "venueID": 1,
-  "hallID": 2,
-  "showID": 2,
-  "bookingDate": "2023-09-11",
-  "numSeatsBooked": 5,
-  "pricingTierChosen": "platinum",
-  "bankDetailsCust": "SBI12345"
-}
