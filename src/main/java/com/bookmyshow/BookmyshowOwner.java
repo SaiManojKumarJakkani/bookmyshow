@@ -151,16 +151,14 @@ public class BookmyshowOwner{
                     LocalDate startDate = LocalDate.parse(startDateString, formatter);
                     System.out.print("Please Enter the end date (YYYY-MM-DD):");
                     String endDateString=s.nextLine();
-                    LocalDate endDate =null;
-                    String movieName=null;
-                    endDate = LocalDate.parse(endDateString, formatter);
+                    LocalDate endDate = LocalDate.parse(endDateString, formatter);
                     int comparisonResult = startDate.compareTo(endDate);
                     if (comparisonResult > 0) {
                         System.out.println("Please enter valid date range!");
                         System.exit(0);
                     }
                     System.out.print("Please enter the movie name:");
-                    movieName=s.nextLine();
+                    String movieName=s.nextLine();
                     currentUser.getListOfShowsForMovieDateRange(startDate,endDate,movieName);
 
                 } catch (Exception e) {System.out.print(e);}
