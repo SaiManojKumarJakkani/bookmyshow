@@ -1,0 +1,8 @@
+{
+    "userID"   :  "user789",
+    "password" :  "password789",
+    "firstName": "Pawan",
+    "lastName":  "Kalyan",
+    "emailID": "pawan.kalyan@gmail.com",
+    "bankAccNo":"999999999999"
+}

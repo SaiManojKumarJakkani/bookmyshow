@@ -1,0 +1,13 @@
+{
+        
+        
+        "type":"multiplex",
+        "address":"Shantiniketan,Varthur,Bangalore",
+        "numhall":"2",
+        "name":"pvr1234",
+        "listhall":[
+            {"numSeatsGold":"100","numSeatsSilver":"90","numSeatsPlatinum":"80"},
+            {"numSeatsGold":"10","numSeatsSilver":"9","numSeatsPlatinum":"8"}
+        ]
+    }
+

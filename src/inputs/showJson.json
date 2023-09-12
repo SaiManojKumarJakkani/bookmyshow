@@ -1,0 +1,11 @@
+{
+  "hallID": 2,
+  "movieName": "barbie",
+  "venueID": 1,
+  "date": "2023-09-11",
+  "startTime": "15:00:00",
+  "endTime": "18:00:00",
+  "silverPrice": 15.0,
+  "goldPrice": 30.0,
+  "platinumPrice": 40.0
+}
