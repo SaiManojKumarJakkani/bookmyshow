@@ -43,6 +43,7 @@ INSERT INTO Venue(ownerID,name,type,address,numhall)
 
 CREATE TABLE Hall(
     hallID INT AUTO_INCREMENT,
+    hallname VARCHAR(20),
     venueID INT,
     numSeatsGold INT,
     numSeatsSilver INT,
