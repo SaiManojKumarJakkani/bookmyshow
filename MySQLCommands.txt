@@ -1,0 +1,103 @@
+CREATE TABLE Owner(
+    userID VARCHAR(255) PRIMARY KEY NOT NULL,
+    password VARCHAR(255),
+    emailID VARCHAR(255),
+    firstName VARCHAR(255),
+    lastName VARCHAR(255),
+    bankAccNo VARCHAR(255)
+    );
+INSERT INTO Owner(userID,password,emailID)
+VALUES  ('owner1','owpass1','owner1@example.com'),
+        ('owner2','owpass2','owner2@example.com'),
+        ('owner3','owpass3','owner3@example.com');
+
+
+CREATE TABLE Customer (
+  userID varchar(255) PRIMARY KEY NOT NULL,
+  password varchar(20) DEFAULT NULL,
+  firstName varchar(80) DEFAULT NULL,
+  lastName varchar(80) DEFAULT NULL,
+  email varchar(20) DEFAULT NULL,
+  PRIMARY KEY (userID)
+);
+INSERT INTO Customer(userID,password,firstName,lastName,email)
+VALUES  ('cust1', 'pass1','arav','kumar','arav@example.com'),
+        ('cust2', 'pass2','aditya','gupta','aditya@example.com'),
+        ('cust3', 'pass3','ayesha','negi','ayesha@example.com'),
+        ;
+
+CREATE TABLE Movie(movieID VARCHAR(255) PRIMARY KEY NOT NULL,movieName VARCHAR(255) DEFAULT NULL);
+INSERT INTO Movie(movieName) VALUES ('avatar');
+
+CREATE TABLE Venue(ownerID VARCHAR(255),
+       venueID INT AUTO_INCREMENT PRIMARY KEY,
+       name VARCHAR(50) UNIQUE,
+       type VARCHAR(20),
+       address VARCHAR(100),
+       numhall INT(50),
+       FOREIGN KEY (ownerID) REFERENCES Owner(userID)
+       );
+INSERT INTO Venue(ownerID,name,type,address,numhall)
+    VALUES
+    ('owner1','venue1','multiplex','address1',2),
+    ('owner1','venue2','multiplex','address2',2),
+    ('owner2','venue3','multiplex','address3',2),
+    ('owner3','venue4','multiplex','address4',3);
+
+CREATE TABLE Hall(
+    hallID INT AUTO_INCREMENT,
+    venueID INT,
+    numSeatsGold INT,
+    numSeatsSilver INT,
+    numSeatsPlatinum INT,
+    PRIMARY KEY (hallID),
+    FOREIGN KEY (venueID) REFERENCES Venue(venueID) ON DELETE CASCADE ON UPDATE CASCADE
+    );
+INSERT INTO Hall(venueID,numSeatsGold,numSeatsSilver,numSeatsPlatinum)
+    VALUES (1,10,20,30),(2,20,30,40),(3,12,23,34),(1,19,30,34);
+
+
+CREATE TABLE Shows(
+    showID INT AUTO_INCREMENT PRIMARY KEY NOT NULL,
+    movieName VARCHAR(255),
+    venueID INT,
+    hallID INT,
+    pricingTiers VARCHAR(255),
+    showDate DATE ,
+    startTime TIME ,
+    endTime TIME ,
+    numSilverBooked INT,
+    numGoldBooked INT ,
+    numPlatinumBooked INT,
+    FOREIGN KEY (venueID) REFERENCES Venue(venueID) ON UPDATE CASCADE,
+    FOREIGN KEY (hallID) REFERENCES Hall(hallID) ON UPDATE CASCADE,
+    FOREIGN KEY (movieName) REFERENCES Movie(movieName) ON UPDATE CASCADE
+    );
+ALTER TABLE Shows ALTER COLUMN numSilverBooked SET DEFAULT 0;
+ALTER TABLE Shows ALTER COLUMN numGoldBooked SET DEFAULT 0;
+ALTER TABLE Shows ALTER COLUMN numPlatinumBooked SET DEFAULT 0;
+
+INSERT INTO Shows(movieName,venueID,hallID,pricingTiers,showDate,startTime,endTime)
+    VALUES
+    ('barbie',1,1,'15.0,30.0,40.0',DATE_ADD(CURDATE(), INTERVAL 1 DAY),'15:00:00','18:00:00'),
+    ('barbie',1,2,'15.0,30.0,40.0',DATE_ADD(CURDATE(), INTERVAL 2 DAY),'15:00:00','18:00:00'),
+    ('avatar',2,1,'10.0,35.0,50.0',DATE_ADD(CURDATE(), INTERVAL 1 DAY),'18:00:00','20:30:00'),
+    ('ice age',2,1,'10.0,35.0,50.0',DATE_ADD(CURDATE(), INTERVAL 4 DAY),'18:00:00','20:30:00'),
+    ('avatar',3,3,'10.0,35.0,50.0',DATE_ADD(CURDATE(), INTERVAL 1 DAY),'18:00:00','20:30:00');
+
+CREATE TABLE Booking(
+    bookingID INT AUTO_INCREMENT PRIMARY KEY,
+    custID VARCHAR(255),
+    venueID INT,
+    hallID INT,
+    showID INT,
+    bookingDate DATE,
+    numSeatsBooked INT,
+    pricingTierChosen VARCHAR(20),
+    bankDetailsCust VARCHAR(255),
+    transactionStatus VARCHAR(50),
+    FOREIGN KEY (venueID) REFERENCES Venue(venueID) ON UPDATE CASCADE,
+    FOREIGN KEY (hallID) REFERENCES Hall(hallID) ON UPDATE CASCADE,
+    FOREIGN KEY (custID) REFERENCES Customer(userID) ON UPDATE CASCADE,
+    FOREIGN KEY (showID) REFERENCES Shows(showID) ON UPDATE CASCADE
+    );
