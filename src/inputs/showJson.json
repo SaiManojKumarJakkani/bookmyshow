@@ -1,0 +1,11 @@
+{
+  "hallID": 16,
+  "movieName": "Nemo",
+  "venueID": 14,
+  "date": "2023-09-14",
+  "startTime": "10:00:00",
+  "endTime": "11:00:00",
+  "silverPrice": 35.0,
+  "goldPrice": 50.0,
+  "platinumPrice": 70.0
+}
